@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
         end
     end
     def destroy
+   
           logout!
           render json: {
             status: 200,
@@ -37,6 +38,6 @@ class SessionsController < ApplicationController
     end
     private
     def session_params
-          params.require(:user).permit(:username, :password)
+          params.require(:user).permit(:username, :email, :password)
     end
     end
