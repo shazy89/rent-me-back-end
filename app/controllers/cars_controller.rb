@@ -15,14 +15,15 @@ class CarsController < ApplicationController
 
   # POST /cars
   def create
+
     @car = Car.new(car_params)
-       binding.pry
     if @car.save
       render json: @car, status: :created, location: @car
     else
       render json: @car.errors, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /cars/1
   def update
