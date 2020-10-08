@@ -1,6 +1,12 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :update, :destroy]
 
+  before_action :check_configuration
+    
+  def check_configuration
+    render 'configuration_missing' if Cloudinary.config.api_key.blank?
+  end
+
   # GET /cars
   def index
     @cars = Car.all
@@ -15,14 +21,18 @@ class CarsController < ApplicationController
 
   # POST /cars
   def create
-
+    
+    url = uploadToCloudinary(params[:car][:img])
     @car = Car.new(car_params)
+    @car.img = url
     if @car.save
+   
       render json: @car, status: :created, location: @car
     else
       render json: @car.errors, status: :unprocessable_entity
     end
   end
+  
 
 
   # PATCH/PUT /cars/1
@@ -47,6 +57,9 @@ class CarsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def car_params
-      params.require(:car).permit(:make, :model, :vehicleType, :capacity, :baggingCapacity, :rentPrice)
+      params.require(:car).permit(:make, :model, :vehicleType, :capacity, :baggingCapacity, :rentPrice, :img)
+    end
+    def uploadToCloudinary(data)
+      Cloudinary::Uploader.upload(data)["url"]
     end
 end
