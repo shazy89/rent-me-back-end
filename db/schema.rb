@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_175002) do
+ActiveRecord::Schema.define(version: 2020_10_11_124156) do
+
+  create_table "books", force: :cascade do |t|
+    t.string "startDate"
+    t.string "endDate"
+    t.string "firstName"
+    t.string "lastName"
+    t.string "phoneNumber"
+    t.string "emailAdress"
+    t.string "car_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "cars", force: :cascade do |t|
     t.string "make"
@@ -25,6 +37,12 @@ ActiveRecord::Schema.define(version: 2020_10_07_175002) do
     t.string "img"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string "image_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -34,4 +52,3 @@ ActiveRecord::Schema.define(version: 2020_10_07_175002) do
   end
 
 end
-
