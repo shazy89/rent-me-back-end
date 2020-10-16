@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_11_124156) do
+ActiveRecord::Schema.define(version: 2020_10_16_014159) do
 
-  create_table "books", force: :cascade do |t|
+  create_table "bookings", force: :cascade do |t|
     t.string "startDate"
     t.string "endDate"
     t.string "firstName"
@@ -35,12 +35,6 @@ ActiveRecord::Schema.define(version: 2020_10_11_124156) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "availability"
     t.string "img"
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string "image_url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

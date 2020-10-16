@@ -11,12 +11,12 @@ class CarsController < ApplicationController
   def index
     @cars = Car.all
 
-    render json: @cars, include: [:books]
+    render json: @cars, include: [:bookings]
   end
 
   # GET /cars/1
   def show
-    render json: @car, include: [:books]
+    render json: @car, include: [:bookings]
   end
 
   # POST /cars
@@ -27,7 +27,7 @@ class CarsController < ApplicationController
    # binding.pry
     @car.img = url
     if @car.save
-      render json: @car, status: :created, location: @car, include: [:books]
+      render json: @car, status: :created, location: @car, include: [:bookings]
     else
       render json: @car.errors, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class CarsController < ApplicationController
 
     if @car.update(car_params)
 
-      render json: @car, include: [:books]
+      render json: @car, include: [:bookings]
     else
       render json: @car.errors, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class CarsController < ApplicationController
   def destroy
   
     @car.destroy
-    render json: @car, include: [:books]
+    render json: @car, include: [:bookings]
   end
 
   private
