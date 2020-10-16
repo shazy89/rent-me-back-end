@@ -48,7 +48,7 @@ class CarsController < ApplicationController
   def destroy
   
     @car.destroy
-    render json: @car, include: [:bookings]
+    render json: @car
   end
 
   private

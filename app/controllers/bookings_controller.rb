@@ -15,7 +15,7 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
-    binding.pry
+ 
     @booking = Booking.new(booking_params)
          
     if @booking.save
@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
       render json: @booking.errors, status: :unprocessable_entity
     end
   end
-
+  
   # PATCH/PUT /bookings/1
   def update
     if @booking.update(booking_params)
@@ -37,7 +37,7 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   def destroy
     @booking.destroy
-    render json: @booking
+    render json: {message: 'successful deletion'}
   end
 
   private
@@ -51,3 +51,7 @@ class BookingsController < ApplicationController
       params.require(:booking).permit(:startDate, :endDate, :firstName, :lastName, :phoneNumber, :emailAdress, :car_id)
     end
 end
+     
+   
+
+
