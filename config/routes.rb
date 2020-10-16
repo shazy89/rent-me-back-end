@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :books
-  resources :cars
+  resources :cars do 
+    resources :books
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

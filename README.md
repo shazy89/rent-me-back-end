@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run this app on your local environment, clone this repository.
+Navigate to the time-management-api directory and run:
 
-Things you may want to cover:
+bundle install
 
-* Ruby version
+rails db:migrate
 
-* System dependencies
+Then ran the server with the rails s command
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This will boot up the Rails web server at http://localhost:3001.
