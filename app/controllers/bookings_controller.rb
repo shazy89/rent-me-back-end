@@ -17,13 +17,15 @@ class BookingsController < ApplicationController
   def create
  
     @booking = Booking.new(booking_params)
-         
     if @booking.save
+      @booking.normalize_phone_number
       render json: @booking, status: :created
     else
-      render json: @booking.errors, status: :unprocessable_entity
+      render json: {errors: @booking.errors.full_messages, status: 500}
     end
   end
+    
+ 
   
   # PATCH/PUT /bookings/1
   def update

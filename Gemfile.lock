@@ -113,6 +113,10 @@ GEM
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    phony (2.18.15)
+    phony_rails (0.14.13)
+      activesupport (>= 3.0)
+      phony (> 2.15)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -192,6 +196,7 @@ DEPENDENCIES
   cloudinary
   dotenv-rails
   listen (~> 3.2)
+  phony_rails
   pry
   puma (~> 4.1)
   rack-cors
