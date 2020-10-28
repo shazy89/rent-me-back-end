@@ -21,51 +21,58 @@ class CarsController < ApplicationController
 
   # POST /cars
   def create
-    
-    url = uploadToCloudinary(params[:car][:img])
     @car = Car.new(car_params)
-   # binding.pry
-    @car.img = url
     if @car.save
-      render json: @car, status: :created, location: @car, include: [:bookings]
-    else
-      render json: @car.errors, status: :unprocessable_entity
-    end
+     url = uploadToCloudinary(params[:car][:img])
+     @car.img = url
+     @car.save
+     render json: @car, status: :created, location: @car, include: [:bookings]
+   else
+    render json: {errors: @car.errors.full_messages, status: 500}
   end
-   
-  # PATCH/PUT /cars/1
-  def update
-
-    if @car.update(car_params)
-
-      render json: @car, include: [:bookings]
-    else
-      render json: @car.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /cars/1
-  def destroy
-  
-    @car.destroy
-    render json: @car
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_car
-      
-      @car = Car.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def car_params
-      params.require(:car).permit(:make, :model, :vehicleType, :capacity, :baggingCapacity, :rentPrice, :img)
-    end
-    def uploadToCloudinary(data)
-      Cloudinary::Uploader.upload(data)["url"]
-    end
 end
-  
+
+# PATCH/PUT /cars/1
+def update
+
+  if @car.update(car_params)
+
+    render json: @car, include: [:bookings]
+  else
+    render json: @car.errors, status: :unprocessable_entity
+  end
+end
+
+# DELETE /cars/1
+def destroy
+
+  @car.destroy
+  render json: @car
+end
+
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_car
+    
+    @car = Car.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def car_params
+    params.require(:car).permit(:make, :model, :vehicleType, :capacity, :baggingCapacity, :rentPrice, :img)
+  end
+  def uploadToCloudinary(data)
+    Cloudinary::Uploader.upload(data)["url"]
+  end
+end
+
+    
+
+
+ 
+
+ 
+
+   
 
 

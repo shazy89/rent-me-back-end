@@ -19,14 +19,13 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     if @booking.save
       @booking.normalize_phone_number
+      @booking.save
       render json: @booking, status: :created
     else
       render json: {errors: @booking.errors.full_messages, status: 500}
     end
   end
     
- 
-  
   # PATCH/PUT /bookings/1
   def update
     if @booking.update(booking_params)
@@ -53,6 +52,8 @@ class BookingsController < ApplicationController
       params.require(:booking).permit(:startDate, :endDate, :firstName, :lastName, :phoneNumber, :emailAdress, :car_id)
     end
 end
+ 
+  
      
    
 
