@@ -9,9 +9,15 @@ class CarsController < ApplicationController
 
   # GET /cars
   def index
-    @cars = Car.all
-
-    render json: @cars, include: [:bookings]
+    @users = User.all
+    if @cars
+       render json: {
+       users: @cars,
+       bookings: @cars.bookings
+    }
+ #   @cars = Car.all
+#
+ #   render json: @cars, include: [:bookings]
   end
 
   # GET /cars/1
