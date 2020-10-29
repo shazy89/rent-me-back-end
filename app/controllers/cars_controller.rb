@@ -11,7 +11,7 @@ class CarsController < ApplicationController
   def index
     @cars = Car.all
 
-    render json: @cars
+    render json: @cars, include: [:bookings]
   end
 
   # GET /cars/1
