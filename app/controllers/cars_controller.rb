@@ -15,6 +15,7 @@ class CarsController < ApplicationController
        users: @cars,
        bookings: @cars.bookings
     }
+  end
  #   @cars = Car.all
 #
  #   render json: @cars, include: [:bookings]
