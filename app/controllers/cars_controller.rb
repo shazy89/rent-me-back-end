@@ -9,16 +9,18 @@ class CarsController < ApplicationController
 
   # GET /cars
   def index
-    @users = User.all
-    if @cars
-       render json: {
-       users: @cars,
-       bookings: @cars.bookings
-    }
-  end
- #   @cars = Car.all
-#
- #   render json: @cars, include: [:bookings]
+    @cars = Car.all
+ #  render json: @cars, include: [:bookings]
+   if @cars
+    render json: {
+    users: @cars
+ }
+else
+    render json: {
+    status: 500,
+    errors: ['no cars found']
+}
+end
   end
 
   # GET /cars/1
@@ -28,6 +30,7 @@ class CarsController < ApplicationController
 
   # POST /cars
   def create
+    binding.pry
     @car = Car.new(car_params)
     if @car.save
      url = uploadToCloudinary(params[:car][:img])
