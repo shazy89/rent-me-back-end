@@ -25,8 +25,9 @@ class CarsController < ApplicationController
     if @car.save
      url = uploadToCloudinary(params[:car][:img])
      @car.img = url
-     @car.save
+     if @car.save
      render json: @car, status: :created
+     end
    else
     render json: {errors: @car.errors.full_messages, status: 500}
   end
