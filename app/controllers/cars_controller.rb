@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :update, :destroy]
 
-  before_action :check_configuration
+ # before_action :check_configuration
     
   def check_configuration
     render 'configuration_missing' if Cloudinary.config.api_key.blank?
@@ -10,17 +10,8 @@ class CarsController < ApplicationController
   # GET /cars
   def index
     @cars = Car.all
- #  render json: @cars, include: [:bookings]
-   if @cars
-    render json: {
-    users: @cars
- }
-else
-    render json: {
-    status: 500,
-    errors: ['no cars found']
-}
-end
+
+    render json: @cars
   end
 
   # GET /cars/1
@@ -30,7 +21,6 @@ end
 
   # POST /cars
   def create
-    binding.pry
     @car = Car.new(car_params)
     if @car.save
      url = uploadToCloudinary(params[:car][:img])
