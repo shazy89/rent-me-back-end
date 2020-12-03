@@ -21,10 +21,11 @@ class CarsController < ApplicationController
 
   # POST /cars
   def create
-    @car = Car.new(car_params)
+    @car = Car.create(car_params)
     if @car.save
      url = uploadToCloudinary(params[:car][:img])
      @car.img = url
+     binding.pry
      if @car.save
      render json: @car, status: :created
      end
