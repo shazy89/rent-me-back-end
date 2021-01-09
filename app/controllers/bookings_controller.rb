@@ -15,8 +15,9 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
- 
+  
     @booking = Booking.new(booking_params)
+  
     if @booking.save
       @booking.normalize_phone_number
       @booking.save
